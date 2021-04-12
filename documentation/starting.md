@@ -24,9 +24,9 @@ This association filters for files with the extension *.sas and opens them with 
     REM With the following line you can stop executing before closing for development purposes
     REM set /p Var1 = "Enter for end"
 
-This batchfile opens it with the program prgsieve.
+This batchfile opens it with the program ProgSieve.
 
-The parameter %1 provides the path and the file name for the further processing with prgsieve.
+The parameter %1 provides the path and the file name for the further processing with ProgSieve.
 
 Example: E:\SAS_works\project_1\analysis_1\pgm\main.sas
 
@@ -34,11 +34,11 @@ Example: E:\SAS_works\project_1\analysis_1\pgm\main.sas
 
 Drag the file you want to index over the floating DropIt icon. You should have activated the correct profile.
 
-The dialogbox will be opend and you can start the processing with the arrow-button. The program prgsieve starts.
+The dialogbox will be opend and you can start the processing with the arrow-button. The program ProgSieve starts.
 
-You can add your flags to the file and close prgsieve.
+You can add your flags to the file and close ProgSieve.
 
-The dialogbox will be closed after terminating prgsieve.
+The dialogbox will be closed after terminating ProgSieve.
 
 
 

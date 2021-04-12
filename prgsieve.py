@@ -7,10 +7,18 @@ Author: Jörg Sahlmann
 
 """
 
+# https://elearning.wsldp.com/python3/python-open-web-browser/#:~:text=Python%20has%20a%20module%20called,browser%20with%20a%20given%20url.
+# https://www.python-kurs.eu/tkinter_labels.php
+# https://pixabay.com/de/vectors/kochen-k%C3%BCche-sieb-utensilien-2027780/
+
+
+
 import tkinter as tk
+import webbrowser
 from tkinter import *
 from functools import partial
 from module_db import search_file, insert_db, update_db, search_files_db
+from module_html import write_ul
 
 def buttonCloseClick(vn):
     print(vn)
@@ -21,6 +29,8 @@ def buttonCloseClick(vn):
 def buttonChooseClick():
     print("Choose")
 
+def buttonSuggestClick():
+    print("Suggest")
 
 def buttonSaveClick(vn, mfp, ins_update):
     c1 = 0 
@@ -73,7 +83,9 @@ def buttonSearchClick(vn):
     c18 = 0 
     c19 = 0 
     c20 = 0
-    search_files_db(r"E:\\ablage\\ksfe_2021\\prgsieve\\sieve.db", c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20)
+    myrows = search_files_db(r"E:\\ablage\\ksfe_2021\\prgsieve\\sieve.db", c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20)
+    write_ul(myrows)
+    webbrowser.open("result.html")
     print("Search")
 
 
@@ -82,6 +94,7 @@ class PrgSieve(Frame):
     def __init__(self, mfp):
         super().__init__()
         self.vars = []
+        self.img = []
         self.initUI(mfp)
     
     def initUI(self, myfilepath):
@@ -99,6 +112,11 @@ class PrgSieve(Frame):
         entryFile = Entry(self, bg = 'white', width = '8', textvariable = entryFileText)
         entryFile.grid(row = 0, column = 1, columnspan = 10, padx = '5', pady = '5', sticky = 'ew')
         entryFileText.set(myfilepath)
+        # Logo
+        logo = PhotoImage(file="E:\\ablage\\ksfe_2021\\prgsieve\\img\\cook3.gif")
+        labelLogo = Label(self, image = logo)
+        labelLogo.grid(row = 15, column = 14)
+        self.img.append(logo)
 
         # =============================================================================================================
         # Label R2 = Language 
@@ -1107,44 +1125,44 @@ class PrgSieve(Frame):
         if fl[11] & 128:
             cb_R12C8.select()
         self.vars.append(value_R12C8) # 135
-        # Checkbutton R12C9 = Document 1
+        # Checkbutton R12C9 = Doxygen
         value_R12C9 = IntVar()
-        cb_R12C9 = Checkbutton(self, anchor='w', text='Document 1', offvalue = 0, onvalue = 256, variable = value_R12C9)
+        cb_R12C9 = Checkbutton(self, anchor='w', text='Doxygen', offvalue = 0, onvalue = 256, variable = value_R12C9)
         cb_R12C9.grid(row = 12, column = 9, sticky=W+E)
         if fl[11] & 256:
-            cb_R12C1.select()
-        self.vars.append(value_R12C1) # 136
-        # Checkbutton R12C10 = Document 2
+            cb_R12C9.select()
+        self.vars.append(value_R12C9) # 136
+        # Checkbutton R12C10 = Document 1
         value_R12C10 = IntVar()
-        cb_R12C10 = Checkbutton(self, anchor='w', text='Document 2', offvalue = 0, onvalue = 512, variable = value_R12C10)
+        cb_R12C10 = Checkbutton(self, anchor='w', text='Document 1', offvalue = 0, onvalue = 512, variable = value_R12C10)
         cb_R12C10.grid(row = 12, column = 10, sticky=W+E)
         if fl[11] & 512:
             cb_R12C10.select()
         self.vars.append(value_R12C10) # 137
-        # Checkbutton R12C11 = Document 3
+        # Checkbutton R12C11 = Document 2
         value_R12C11 = IntVar()
-        cb_R12C11 = Checkbutton(self, anchor='w', text='Document 3', offvalue = 0, onvalue = 1024, variable = value_R12C11)
+        cb_R12C11 = Checkbutton(self, anchor='w', text='Document 2', offvalue = 0, onvalue = 1024, variable = value_R12C11)
         cb_R12C11.grid(row = 12, column = 11, sticky=W+E)
         if fl[11] & 1024:
             cb_R12C11.select()
         self.vars.append(value_R12C11) # 138
-        # Checkbutton R12C12 = Document 4
+        # Checkbutton R12C12 = Document 3
         value_R12C12 = IntVar()
-        cb_R12C12 = Checkbutton(self, anchor='w', text='Document 4', offvalue = 0, onvalue = 2048, variable = value_R12C12)
+        cb_R12C12 = Checkbutton(self, anchor='w', text='Document 3', offvalue = 0, onvalue = 2048, variable = value_R12C12)
         cb_R12C12.grid(row = 12, column = 12, sticky=W+E)
         if fl[11] & 2048:
             cb_R12C12.select()
         self.vars.append(value_R12C12) # 139
-         # Checkbutton R12C13 = Document 5
+         # Checkbutton R12C13 = Document 4
         value_R12C13 = IntVar()
-        cb_R12C13 = Checkbutton(self, anchor='w', text='Document 5', offvalue = 0, onvalue = 4096, variable = value_R12C13)
+        cb_R12C13 = Checkbutton(self, anchor='w', text='Document 4', offvalue = 0, onvalue = 4096, variable = value_R12C13)
         cb_R12C13.grid(row = 12, column = 13, sticky=W+E)
         if fl[11] & 4096:
             cb_R12C13.select()
         self.vars.append(value_R12C13) # 140
-        # Checkbutton R12C14 = Document 6
+        # Checkbutton R12C14 = Document 5
         value_R12C14 = IntVar()
-        cb_R12C14 = Checkbutton(self, anchor='w', text='Document 6', offvalue = 0, onvalue = 8192, variable = value_R12C14)
+        cb_R12C14 = Checkbutton(self, anchor='w', text='Document 5', offvalue = 0, onvalue = 8192, variable = value_R12C14)
         cb_R12C14.grid(row = 12, column = 14, sticky=W+E)
         if fl[11] & 8192:
             cb_R12C14.select()
@@ -1152,17 +1170,20 @@ class PrgSieve(Frame):
 
         # =============================================================================================================
         # Load file
-        buttonLoad = Button(self, text = 'Choose', command=buttonChooseClick)
+        buttonLoad = Button(self, text = 'Choose', state = 'disabled', command=buttonChooseClick)
         buttonLoad.grid(row = 15, column = 1, padx = '5', pady = '5')
+        # Suggest checks
+        buttonLoad = Button(self, text = 'Suggest', state = 'disabled', command=buttonSuggestClick)
+        buttonLoad.grid(row = 15, column = 2, padx = '5', pady = '5')
         # Save file
         buttonSave = Button(self, text = 'Save', command=partial(buttonSaveClick, self.vars, myfilepath, fl[20]))
-        buttonSave.grid(row = 15, column = 2, padx = '5', pady = '5')
+        buttonSave.grid(row = 15, column = 3, padx = '5', pady = '5')
         # Search files
         buttonSearch = Button(self, text = 'Search', command=partial(buttonSearchClick, self.vars))
-        buttonSearch.grid(row = 15, column = 3, padx = '5', pady = '5')
+        buttonSearch.grid(row = 15, column = 4, padx = '5', pady = '5')
         # Close
         buttonClose = Button(self, text = 'Close', command = partial(buttonCloseClick, 0))
-        buttonClose.grid(row = 15, column = 4, padx = '5', pady = '5')
+        buttonClose.grid(row = 15, column = 5, padx = '5', pady = '5')
 
 
         col_count, row_count = self.grid_size()
